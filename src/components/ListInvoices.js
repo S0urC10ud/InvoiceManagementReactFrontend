@@ -2,11 +2,12 @@ import {
   Get
 } from "react-axios";
 import Invoice from "./Invoice";
+import config from "../config.json";
 
 export default function GetUser() {
   return (
     <div className="ListElements">
-      <Get url="http://192.168.1.219/api/invoice-data-json">
+      <Get url= {config.SERVER_URL+"/api/invoice-data-json"}>
         {(error, response, isLoading, makeRequest, axios) => {
           if (error) {
             return (
@@ -27,6 +28,7 @@ export default function GetUser() {
                 <div>
                   {response.data.map((invoice)=>
                     <Invoice
+                    key={invoice.id}
                     id={invoice.id}
                     name={invoice.Name}
                     priceNet={invoice.PriceNet}
